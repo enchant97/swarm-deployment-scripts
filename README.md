@@ -15,7 +15,7 @@ A collection of scripts to help automate a setup of Docker Swarm deployment.
 6. ~ Init swarm (SINGLE)
 7. Register nodes in swarm
 8. ~ Setup GlusterFS pool peers
-9. ~ Setup replicated GlusterFS volume (SINGLE)
+9. ./setup-gluster-vol, must provide peer hostnames (SINGLE)
 
 ### ./install
 1. Updates packages
@@ -26,3 +26,7 @@ A collection of scripts to help automate a setup of Docker Swarm deployment.
 ### ./post-install
 1. Create & Mount a LVM Volume for GlusterFS
 2. Make directory for GlusterFS volume
+
+### ./setup-gluster-vol
+1. Create GlusterFS volume on provided peers
+2. Start the volume

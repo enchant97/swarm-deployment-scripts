@@ -1,0 +1,35 @@
+#!/bin/env bash
+#
+# Script to create a gluster volume on connected peers
+# source: https://docs.gluster.org/en/latest/Quick-Start-Guide/Quickstart/
+#
+
+./scripts/require-root
+
+if [ $# -eq 0 ]
+then
+    echo "missing node hostnames"
+    exit 1
+fi
+
+brick_name=cluster-brick
+volume_name=gv0
+mount_path=/mnt/$brick_name/$volume_name
+node_names=$@
+node_count=$#
+peer_mounts=
+
+if [ ! -d $mount_path ]
+then
+    echo "mounted directory must exist at:" $mount_path
+    exit 1
+fi
+
+for node in $node_names
+do
+    peer_mounts="$peer_mounts $node:$mount_path"
+done
+
+gluster volume create $volume_name replica $node_count $peer_mounts
+
+gluster volume start $volume_name
