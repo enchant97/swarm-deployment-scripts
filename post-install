@@ -8,7 +8,7 @@ lvm_group=ubuntu-vg
 lvm_vol_name=cluster-brick
 
 # Setup LVM Volume for GlusterFS Brick
-./create-gluster-vol $lvm_group $lvm_vol_name 100G
+./scripts/create-gluster-vol $lvm_group $lvm_vol_name 100G
 
 # Make directory for GlusterFS brick volume
 mkdir -p /mnt/$lvm_vol_name/data
