@@ -1,7 +1,4 @@
 #!/bin/env bash
 
-## Setup LVM Volumes for GlusterFS  ##
-# cluster data
-./create-gluster-vol ubuntu-vg cluster-data 100G
-# cluster config
-./create-gluster-vol ubuntu-vg cluster-config 5G
+# Setup LVM Volume for GlusterFS Brick
+./create-gluster-vol ubuntu-vg cluster-brick 100G

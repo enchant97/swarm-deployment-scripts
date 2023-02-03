@@ -11,11 +11,35 @@
 
 ./scripts/require-root
 
+if [ $# -ne 3 ]
+then
+    echo "missing required arguments"
+    exit 1
+fi
+
 lvm_group=$1
 lvm_vol_name=$2
 lvm_size=$3
 lvm_vol_dev_path=/dev/$lvm_group/$lvm_vol_name
 lvm_vol_mount_path=/mnt/$lvm_vol_name
+
+if [ ! -d "/dev/$lvm_group" ]
+then
+    echo "volume group not found at" "/dev/"$lvm_group
+    exit 1
+fi
+
+if [ -d "$lvm_vol_dev_path" ]
+then
+    echo "volume already exists at" $lvm_vol_dev_path
+    exit 1
+fi
+
+if [ -d "$lvm_vol_mount_path" ]
+then
+    echo "mount already exists at" $lvm_vol_mount_path
+    exit 1
+fi
 
 echo "## Creating LVM Volume" $lvm_group/$lvm_vol_name "##"
 
