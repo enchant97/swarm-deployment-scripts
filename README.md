@@ -3,6 +3,7 @@ A collection of scripts to help automate a setup of Docker Swarm deployment.
 
 > Use these scripts at your own risk!
 
+
 ## Usage
 
 > "~" indicates manual step
@@ -40,9 +41,18 @@ A collection of scripts to help automate a setup of Docker Swarm deployment.
 1. Create access mount
 2. Mount GlusterFS volume
 
-## Adding A New Node
+### Adding A New Node
 1. Run commands in usage guide, skipping steps marked as "ONCE"
 2. Add brick into GlusterFS pool
    1. `gluster volume add-brick <volume name> replica <node count> <node hostname>:/data/<brick name>/<volume name>`
    2. `gluster volume rebalance <volume name> fix-layout start` (ensure everything is synced)
    3. `gluster volume rebalance <volume name> status` (watch the status)
+
+
+## Notes
+- /mnt/data/ the mounted "data" volume replicated using GlusterFS (suitable for application use).
+- /data/cluster-brick/ the mounted GlusterFS brick (do not directly use, it's managed by GlusterFS).
+- Docker Swarm Ports (uses defaults)
+  - 2377 TCP
+  - 7946 TCP/UDP
+  - 4789 UDP
