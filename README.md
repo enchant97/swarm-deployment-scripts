@@ -13,9 +13,13 @@ A collection of scripts to help automate a setup of Docker Swarm deployment.
 4. Run ./install (ALL)
 5. Run ./post-install (ALL)
 6. ~ Init swarm (SINGLE)
+   - Run on leader `docker swarm init`
 7. Register nodes in swarm
+   1. Get join token from leader `docker swarm join-token manager`
+   2. Run shown command on all other nodes
 8. ~ Setup GlusterFS pool peers
-9. ./setup-gluster-vol, must provide peer hostnames (SINGLE)
+   - `gluster peer probe <node hostname>`
+9.  ./setup-gluster-vol, must provide peer hostnames (SINGLE)
 
 ### ./install
 1. Updates packages
