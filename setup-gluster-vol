@@ -4,6 +4,8 @@
 # source: https://docs.gluster.org/en/latest/Quick-Start-Guide/Quickstart/
 #
 
+set -eu
+
 ./scripts/require-root
 
 if [ $# -eq 0 ]

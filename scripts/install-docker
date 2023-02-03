@@ -3,6 +3,8 @@
 # source: https://docs.docker.com/engine/install/ubuntu/
 #
 
+set -eu
+
 ./scripts/require-root
 
 if [ "$(dpkg -l | awk '/docker/ {print }'|wc -l)" -ge 1 ]; then

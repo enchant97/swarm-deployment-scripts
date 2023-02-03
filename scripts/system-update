@@ -3,6 +3,8 @@
 # Update the system packages, may require reboot after completion
 #
 
+set -eu
+
 ./scripts/require-root
 
 echo "## Updating Packages ##"

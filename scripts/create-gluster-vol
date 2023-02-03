@@ -9,6 +9,8 @@
 #   3. Volume Size (e.g. 10G)
 #
 
+set -eu
+
 ./scripts/require-root
 
 if [ $# -ne 3 ]
