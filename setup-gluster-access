@@ -1,0 +1,16 @@
+#!/bin/env bash
+
+set -eu
+
+./scripts/require-root
+
+brick_name=cluster-brick
+volume_name=data
+brick_path=/data/$brick_name
+volume_path=$brick_path/$volume_name
+mount_path=/mnt/$volume_name
+
+# Create client mount to access volume
+mkdir -p $mount_path
+echo localhost:/$volume_name $mount_path 'glusterfs,_netdev defaults 0 2' >> /etc/fstab
+mount -a

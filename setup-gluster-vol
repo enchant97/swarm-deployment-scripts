@@ -18,7 +18,6 @@ brick_name=cluster-brick
 volume_name=data
 brick_path=/data/$brick_name
 volume_path=$brick_path/$volume_name
-mount_path=/mnt/$brick_name/$volume_name
 node_names=$@
 node_count=$#
 peer_mounts=
@@ -38,8 +37,3 @@ done
 mkdir -p $volume_path
 gluster volume create $volume_name replica $node_count $peer_mounts
 gluster volume start $volume_name
-
-# Create client mount to access volume
-mkdir -p $mount_path
-echo localhost:/$volume_name $mount_path 'glusterfs,_netdev defaults 0 2' >> /etc/fstab
-mount -a
