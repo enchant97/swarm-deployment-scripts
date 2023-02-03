@@ -53,7 +53,7 @@ lvcreate -L $lvm_size -n $lvm_vol_name $lvm_group
 mkfs.xfs -i size=512 $lvm_vol_dev_path
 
 # create mountpoint
-mkdir -p $lvm_new_vol_mount_path
+mkdir -p $lvm_vol_mount_path
 
 # add fstab entry to define a mount
 echo $lvm_vol_dev_path $lvm_vol_mount_path 'xfs defaults 0 2' >> /etc/fstab
