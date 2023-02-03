@@ -10,7 +10,7 @@ fi
 echo "## Start GlusterFS Install ##"
 
 # Install GlusterFS
-apt install glusterfs-server
+apt install glusterfs-server -y
 
 # Start & Enable GlusterFS
 systemctl enable --now glusterd.service
