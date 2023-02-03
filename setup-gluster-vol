@@ -15,7 +15,7 @@ then
 fi
 
 brick_name=cluster-brick
-volume_name=gv0
+volume_name=data
 mount_path=/mnt/$brick_name/$volume_name
 node_names=$@
 node_count=$#
