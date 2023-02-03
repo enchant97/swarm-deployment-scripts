@@ -1,0 +1,37 @@
+#!/bin/env bash
+#
+# Create, format and mount a new LVM volume for use with GlusterFS.
+# NOTE: Does not register the volumes to Gluster.
+#
+# Arguments:
+#   1. LVM Group Name
+#   2. LVM Volume Name
+#   3. Volume Size (e.g. 10G)
+#
+
+./scripts/require-root
+
+lvm_group=$1
+lvm_vol_name=$2
+lvm_size=$3
+lvm_vol_dev_path=/dev/$lvm_group/$lvm_vol_name
+lvm_vol_mount_path=/mnt/$lvm_vol_name
+
+echo "## Creating LVM Volume" $lvm_group/$lvm_vol_name "##"
+
+# create lvm volume
+lvcreate -L $lvm_size -n $lvm_vol_name $lvm_group
+
+# format the created lvm volume
+# inode set to 512 for extended attributes added by GlusterFS
+mkfs.xfs -i size=512 $lvm_vol_dev_path
+
+# create mountpoint
+mkdir -p $lvm_new_vol_mount_path
+
+# add fstab entry to define a mount
+echo $lvm_vol_dev_path $lvm_vol_mount_path 'xfs defaults 0 2' >> /etc/fstab
+# mount the new entry
+mount -a && mount
+
+echo "## Created LVM Volume" $lvm_group/$lvm_vol_name "##"
