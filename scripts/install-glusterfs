@@ -1,0 +1,18 @@
+#!/bin/env bash
+
+./scripts/require-root
+
+if [ "$(dpkg -l | awk '/glusterfs-server/ {print }'|wc -l)" -ge 1 ]; then
+    echo "GlusterFS detected as installed"
+    exit 0
+fi
+
+echo "## Start GlusterFS Install ##"
+
+# Install GlusterFS
+apt install glusterfs-server
+
+# Start & Enable GlusterFS
+systemctl enable --now glusterd.service
+
+echo "## Finished GlusterFS Install ##"

@@ -9,3 +9,4 @@ then
 fi
 
 ./scripts/install-docker
+./scripts/install-glusterfs
