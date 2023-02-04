@@ -12,5 +12,7 @@ mount_path=/mnt/$volume_name
 
 # Create client mount to access volume
 mkdir -p $mount_path
-echo localhost:/$volume_name $mount_path 'glusterfs,_netdev defaults 0 2' >> /etc/fstab
+# mount when ready (noauto,x-systemd.automount)
+echo 'localhost:/'$volume_name $mount_path 'glusterfs defaults,_netdev,noauto,x-systemd.automount 0 0' >> /etc/fstab
+
 mount -a
