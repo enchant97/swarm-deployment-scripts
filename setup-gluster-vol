@@ -37,3 +37,8 @@ done
 mkdir -p $volume_path
 gluster volume create $volume_name replica $node_count $peer_mounts
 gluster volume start $volume_name
+
+# Enable bit-rot detection
+gluster volume bitrot $volume_name enable
+gluster volume bitrot $volume_name scrub-frequency monthly
+gluster volume bitrot $volume_name scrub-throttle normal
